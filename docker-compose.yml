@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  brainscan-app:
+    build: .
+    container_name: brainscan_ai_container
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models         # Permet de charger/sauvegarder le modèle h5 à chaud
+      - ./data:/app/data             
+    environment:
+      - PYTHONUNBUFFERED=1
