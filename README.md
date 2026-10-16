@@ -1,6 +1,3 @@
-Voici le fichier `README.md` complet avec la documentation détaillée de chaque fonction. Crée un fichier nommé `README.md` et colle ce code :
-
-```markdown
 # 🧠 BrainScan AI - Classification des Tumeurs Cérébrales par CNN
 
 > Startup marocaine spécialisée dans l'imagerie médicale assistée par IA pour le diagnostic précoce des tumeurs cérébrales à partir d'images IRM.
@@ -15,6 +12,7 @@ Dataset1/
     ├── meningioma/
     ├── notumor/
     └── pituitary/
+
 ```
 
 ## ⚙️ Installation
