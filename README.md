@@ -1,7 +1,4 @@
 # 🧠 BrainScan AI - Classification des Tumeurs Cérébrales par CNN
-
-> Startup marocaine spécialisée dans l'imagerie médicale assistée par IA pour le diagnostic précoce des tumeurs cérébrales à partir d'images IRM.
-
 Application intelligente capable de classer les IRM en 4 classes : `glioma`, `meningioma`, `notumor`, `pituitary`.
 
 ## 📁 Structure du Dataset
