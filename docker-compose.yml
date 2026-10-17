@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   brainscan-app:
     build: .
@@ -8,7 +6,27 @@ services:
     ports:
       - "8501:8501"
     volumes:
-      - ./models:/app/models         # Permet de charger/sauvegarder le modèle h5 à chaud
-      - ./data:/app/data             
+      # Bind mount racine : app/, src/, notebooks/ synchronises en temps reel (Windows <-> conteneur)
+      - .:/app
+      # Montages explicites pour garantir persistance meme si montage racine filtre
+      - ./models:/app/models
+      - ./data:/app/data
+      # Volumes anonymes : evite de polluer l'hote avec cache Python
+      - /app/__pycache__
+      - /app/src/__pycache__
+      - /app/app/__pycache__
+      - /app/.pytest_cache
     environment:
       - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      # Hot reload : polling nécessaire sur Windows + OneDrive (filesystem events peu fiables)
+      - STREAMLIT_SERVER_FILE_WATCHER_TYPE=poll
+      - STREAMLIT_SERVER_RUN_ON_SAVE=true
+    # Hot reload activé : rechargement auto à chaque sauvegarde dans VS Code
+    command: >
+      streamlit run app/app.py
+      --server.address=0.0.0.0
+      --server.port=8501
+      --server.runOnSave=true
+      --server.fileWatcherType=poll
+      --server.headless=true
